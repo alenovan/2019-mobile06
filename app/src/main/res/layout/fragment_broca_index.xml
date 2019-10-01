@@ -36,6 +36,9 @@
 
             <RadioGroup
                 android:id="@+id/group_gender"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
