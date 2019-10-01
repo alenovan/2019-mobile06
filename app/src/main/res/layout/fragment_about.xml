@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.AboutFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/text1"
+            android:textSize="25sp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:text="The Program is created by" />
+
+        <FrameLayout
+            android:layout_below="@+id/text1"
+            android:id="@+id/line"
+            android:background="@android:color/darker_gray"
+            android:layout_margin="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:layout_below="@id/line"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/text_name"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>
