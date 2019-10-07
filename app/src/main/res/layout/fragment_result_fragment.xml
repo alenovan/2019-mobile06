@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.AboutFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/text_information"
+            android:textSize="25sp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:text="The Program is created by" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:text="Try Again"
+            android:id="@+id/button_try_again"
+            android:layout_margin="12dp"
+            android:layout_below="@id/text_information"
+            android:layout_height="wrap_content"></Button>
+
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

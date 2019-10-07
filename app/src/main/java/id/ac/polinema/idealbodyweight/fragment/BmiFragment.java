@@ -1,29 +1,32 @@
 package id.ac.polinema.idealbodyweight.fragment;
 
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import id.ac.polinema.idealbodyweight.R;
+import id.ac.polinema.idealbodyweight.util.BmiIndex;
+import id.ac.polinema.idealbodyweight.util.BrocaIndex;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MenuFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
  */
-public class MenuFragment extends Fragment {
-    Button broca_button, bmi_button;
-    private OnFragmentInteractionListener mListener;
+public class BmiFragment extends Fragment {
 
-    public MenuFragment() {
+    private OnFragmentInteractionListener mListener;
+    public BmiFragment() {
         // Required empty public constructor
     }
 
@@ -32,42 +35,34 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_menu, container, false);
-        // sisipkan register event click nanti di sini.
-        broca_button = view.findViewById(R.id.button_broca);
-        bmi_button = view.findViewById(R.id.button_bmi);
-        clickFunction();
+        View view = inflater.inflate(R.layout.fragment_bmi, container, false);
+        final EditText  tinggi  = view.findViewById(R.id.input_tinggi);
+        final EditText  berat = view.findViewById(R.id.input_berat);
+        Button calculateButton = view.findViewById(R.id.button_calculate);
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    float  tinggis = Float.valueOf(tinggi.getText().toString());
+                    float  berats = Float.valueOf(berat.getText().toString());
+                    if (tinggi.length() != 0 || berat.length() != 0 ) {
+                        BmiIndex bmiIndex = new BmiIndex(berats,tinggis);
+                        mListener.onCalculateBmiIndexClicked(bmiIndex.getIndex());
+                    } else {
+                        Toast.makeText(getActivity(), "Isi Tinggi dan berat", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
         return view;
     }
 
-    public void clickFunction() {
-        broca_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null){
-                    mListener.onBrocaIndexButtonClicked();
-                }
-
-            }
-        });
-
-        bmi_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null){
-                    mListener.onBodyMassIndexButtonClicked();
-                }
-
-            }
-        });
-    }
-
     // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -99,9 +94,7 @@ public class MenuFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-
-        void onBrocaIndexButtonClicked();
-
-        void onBodyMassIndexButtonClicked();
+        void onCalculateBmiIndexClicked(float index);
     }
+
 }

@@ -1,5 +1,6 @@
 package id.ac.polinema.idealbodyweight.fragment;
 
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,20 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import id.ac.polinema.idealbodyweight.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MenuFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
  */
-public class MenuFragment extends Fragment {
-    Button broca_button, bmi_button;
+public class ResultFragment extends Fragment {
+    String information;
+    String status;
     private OnFragmentInteractionListener mListener;
-
-    public MenuFragment() {
+    public ResultFragment() {
         // Required empty public constructor
     }
 
@@ -32,42 +31,22 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_menu, container, false);
-        // sisipkan register event click nanti di sini.
-        broca_button = view.findViewById(R.id.button_broca);
-        bmi_button = view.findViewById(R.id.button_bmi);
-        clickFunction();
-        return view;
-    }
-
-    public void clickFunction() {
-        broca_button.setOnClickListener(new View.OnClickListener() {
+        View view = inflater.inflate(R.layout.fragment_result_fragment, container, false);
+        TextView informationText = view.findViewById(R.id.text_information);
+        informationText.setText(information);
+        Button tryAgainButton = view.findViewById(R.id.button_try_again);
+        tryAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (mListener != null){
-                    mListener.onBrocaIndexButtonClicked();
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onTryAgainButtonClicked(status);
                 }
-
             }
         });
-
-        bmi_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null){
-                    mListener.onBodyMassIndexButtonClicked();
-                }
-
-            }
-        });
+        return  view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -99,9 +78,15 @@ public class MenuFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-
-        void onBrocaIndexButtonClicked();
-
-        void onBodyMassIndexButtonClicked();
+        void onTryAgainButtonClicked(String tag);
     }
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
 }
